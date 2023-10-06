@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from "flowbite-react";
+import {Card, Spinner} from "flowbite-react";
 
 type BotChatBubbleProps = {
     message?: string
@@ -18,7 +18,7 @@ const BotChatBubble = ({message}: BotChatBubbleProps) => {
             "
         >
             <p className="text-gray-900">
-                {message || "Nothing"}
+                {message || <Spinner/>}
             </p>
         </Card>
     );
