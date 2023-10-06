@@ -2,30 +2,45 @@ import React from 'react';
 import {Button, TextInput} from "flowbite-react";
 import {AiOutlineSend} from "react-icons/ai"
 
-const MessageInputBox = () => {
+type MessageInputBoxProps = {
+    sendMessage: any;
+    msg: string;
+    setMsg: any;
+}
+
+const MessageInputBox = ({sendMessage, msg, setMsg}: MessageInputBoxProps) => {
+
+    const onMsgChange = (event: any) => {
+        setMsg(event.target.value);
+    }
+
     return (
-        <div
+        <form
             className="
                 align-bottom
                 mt-auto
                 flex
                 w-[calc(100%)]
             "
+            onSubmit={sendMessage}
         >
             <TextInput
                 className="
                     w-[calc(100%)]
                 "
+                value={msg}
+                onChange={onMsgChange}
             />
             <Button
                 className="
                     ml-2
                     p-0
                 "
+                type="submit"
             >
                 <AiOutlineSend size='1.2em'/>
             </Button>
-        </div>
+        </form>
     );
 };
 

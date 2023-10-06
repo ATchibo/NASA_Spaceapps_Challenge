@@ -18,6 +18,15 @@ const MainChat = () => {
         content: intl.formatMessage({id: "initial_msg_bot"})
     }]);
 
+
+    const [currentMessage, setCurrentMessage] = useState("");
+    const sendMessage = (event: any) => {
+        event.preventDefault();
+
+        console.log(currentMessage);
+        setCurrentMessage("");
+    }
+
     return (
         <Card
             className="
@@ -29,7 +38,7 @@ const MainChat = () => {
             "
         >
             <TextArea messageQueue={messageQueue}/>
-            <MessageInputBox />
+            <MessageInputBox sendMessage={sendMessage} msg={currentMessage} setMsg={setCurrentMessage}/>
         </Card>
     );
 };

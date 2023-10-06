@@ -9,7 +9,7 @@ const BotChatBubble = ({message}: BotChatBubbleProps) => {
     return (
         <Card
             className="
-                w-min
+                inline-flex
                 max-w-[calc(100%-15rem)]
                 {/*bg-cyan-700*/}
                 bg-gray-200

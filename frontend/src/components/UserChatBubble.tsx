@@ -9,7 +9,7 @@ const UserChatBubble = ({message}: UserChatBubbleProps) => {
     return (
         <Card
             className="
-                w-min
+                inline-flex
                 max-w-[calc(100%-15rem)]
                 bg-cyan-700
                 mt-2
