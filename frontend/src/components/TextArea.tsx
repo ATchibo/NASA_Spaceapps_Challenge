@@ -1,4 +1,6 @@
 import React from 'react';
+import BotChatBubble from "./BotChatBubble";
+import UserChatBubble from "./UserChatBubble";
 
 const TextArea = () => {
     return (
@@ -7,7 +9,10 @@ const TextArea = () => {
                 overflow-y-scroll
             "
         >
-            text
+
+            <BotChatBubble />
+            <UserChatBubble />
+
         </div>
     );
 };
