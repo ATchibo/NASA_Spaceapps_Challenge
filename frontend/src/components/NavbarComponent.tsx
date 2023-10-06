@@ -1,5 +1,6 @@
 import React from 'react';
 import {Navbar} from "flowbite-react";
+import {FormattedMessage} from "react-intl";
 
 const NavbarComponent = () => {
     return (
@@ -17,7 +18,7 @@ const NavbarComponent = () => {
                     src="/favicon.svg"
                 />
             <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-              Flowbite React
+              <FormattedMessage id="app_title"/>
             </span>
             </Navbar.Brand>
 
