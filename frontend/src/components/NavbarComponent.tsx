@@ -5,7 +5,7 @@ import {FormattedMessage} from "react-intl";
 const NavbarComponent = () => {
     return (
         <Navbar
-            className="bg-white border-gray-200"
+            className="bg-white border-gray-100"
             fluid
         >
 
