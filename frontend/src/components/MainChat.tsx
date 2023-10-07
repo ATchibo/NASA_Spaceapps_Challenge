@@ -3,6 +3,7 @@ import {Card} from "flowbite-react";
 import TextArea from "./TextArea";
 import MessageInputBox from "./MessageInputBox";
 import {useIntl} from "react-intl";
+import {io, Socket} from "socket.io-client";
 
 export type Message = {
     sender: string;
@@ -22,38 +23,62 @@ const MainChat = () => {
         content: INITIAL_BOT_MESSAGE
     }]);
 
-    const [msgToSend, setMsgToSend] = useState("");
-
-    // const {
-    //     data: sendMessageData,
-    //     isFetching: isSendMessageFetching,
-    //     isSuccess: isSendMessageSuccess,
-    //     refetch: refetchSendMessage
-    // } = useQuery(
-    //     ["sendMessage", msgToSend],
-    //     () => sendMessageApi(msgToSend),
-    //     {
-    //         enabled: false
-    //     }
-    // )
-
     const [currentMessage, setCurrentMessage] = useState("");
+
+    /**
+     * Websocket Connection
+     * */
+
+    const [socket, setSocket] = useState<Socket>();
+    const [receivedMsg, setReceivingMsg] = useState("");
+
+    useEffect(() => {
+        // connect to WebSocket server
+        const newSocket = io("http://localhost:8080");
+        setSocket(newSocket);
+
+        // set up event listeners for incoming messages
+        newSocket.on("connect", () => console.log("Connected to WebSocket"));
+        newSocket.on("disconnect", () =>
+            console.log("Disconnected from WebSocket")
+        );
+        newSocket.on("message", (data) => {
+            if (data === "$$$") {
+                // end of message
+                setReceivingMsg("");
+            } else {
+                setReceivingMsg(receivedMsg + data);
+            }
+        });
+
+        // clean up on unmount
+        return () => {
+            newSocket.disconnect();
+        };
+    }, []);
+
     const sendMessage = (event: any) => {
         event.preventDefault();
 
         if (currentMessage.length === 0)
             return;
 
-        setMsgToSend(currentMessage);
+        if (socket)
+            socket.emit("message", currentMessage);
+        setMessageQueue([...messageQueue, {sender: SENDER_TYPE_USER, content: currentMessage}]);
         setCurrentMessage("");
     }
 
     useEffect(() => {
-        if (msgToSend.length > 0) {
-            setMessageQueue([...messageQueue, {sender: SENDER_TYPE_USER, content: msgToSend}]);
-            setMsgToSend("");
+        if (receivedMsg.length > 0) {
+            setMessageQueue([...messageQueue.slice(0, messageQueue.length-1), {sender: SENDER_TYPE_BOT, content: receivedMsg}]);
         }
-    }, [msgToSend]);
+    }, [receivedMsg]);
+
+    /**
+    * End Websocket Connection
+    * */
+
 
     return (
         <Card
