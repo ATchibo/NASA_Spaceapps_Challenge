@@ -38,6 +38,7 @@ const MainChat = () => {
         setCurrentMessage("");
 
         console.log("starting sending msg");
+        setReceivedMsg("");
         startSendingMessage();
     }
 
@@ -350,6 +351,18 @@ const MainChat = () => {
         var currentFnIndex = fnIndex;
         setFnIndex(currentFnIndex + 1);
 
+        let allMessages: any[] = [];
+
+        for (let i = 2; i < messageQueue.length; i += 2) {
+            if (messageQueue[i].content.length > 0)
+                allMessages.push([messageQueue[i-1].content, messageQueue[i].content]);
+            else allMessages.push([messageQueue[i-1].content, null]);
+        }
+        // allMessages.push([msgToSend, null]);
+
+        console.log(messageQueue);
+        console.log(allMessages);
+
         // step 7/7
         const socket = connectToWebsocket();
         socket.addEventListener("add", (ev) => {
@@ -402,7 +415,7 @@ const MainChat = () => {
                         ],
                         null,
                         null,
-                        [[msgToSend, null]]
+                        allMessages
                     ],
                     event_data: null,
                     fn_index: currentFnIndex,
@@ -410,10 +423,7 @@ const MainChat = () => {
                 }));
             } else if (dataString.includes("process_starts")) {
                 setReceivedMsg("");
-                setReceivingMsg(false);
             } else if (dataString.includes("process_generating")) {
-                console.log(ev.data);
-
                 const response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"")[0];
                 console.log(response);
                 setReceivedMsg(receivedMsg + response);
@@ -421,7 +431,7 @@ const MainChat = () => {
         });
         socket?.addEventListener(closeEvent, ev => {
             console.log("gata bos")
-            setFnIndex(currentFnIndex + 1);
+            setFnIndex(36);
             setWsIndex(-1);
         })
     }
@@ -455,24 +465,6 @@ const MainChat = () => {
                 break;
         }
     }, [wsIndex]);
-
-    // useEffect(() => {
-    //     // connect to WebSocket server
-    //
-    //     // const socket = new WebSocket('ws://localhost:5000/echo');
-    //     const socket = new WebSocket('wss://316c-35-203-157-221.ngrok-free.app/queue/join');
-    //     socket.addEventListener('message', ev => {
-    //         if (ev.data === "$$$") {
-    //             // end of message
-    //             setReceivedMsg("");
-    //             setReceivingMsg(false);
-    //         } else {
-    //             console.log(ev.data);
-    //             setReceivedMsg(receivedMsg + ev.data);
-    //         }
-    //     });
-    //     setSocket(socket);
-    // }, []);
 
     useEffect(() => {
 
