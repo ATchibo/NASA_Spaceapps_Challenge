@@ -1,11 +1,14 @@
 import React from 'react';
 import {Card, Spinner} from "flowbite-react";
+//@ts-ignore
+import SanitizedHTML from 'react-sanitized-html';
 
 type BotChatBubbleProps = {
     message?: string
 }
 
 const BotChatBubble = ({message}: BotChatBubbleProps) => {
+
     return (
         <Card
             className="
@@ -16,9 +19,9 @@ const BotChatBubble = ({message}: BotChatBubbleProps) => {
                 mb-2
             "
         >
-            <p className="text-gray-900">
-                {message || <Spinner/>}
-            </p>
+            {/*<p className="text-gray-900">*/}
+                {message && message.length > 0 ? <SanitizedHTML html={message}/> : <Spinner/>}
+            {/*</p>*/}
         </Card>
     );
 };
