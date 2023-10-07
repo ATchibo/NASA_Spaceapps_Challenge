@@ -424,8 +424,8 @@ const MainChat = () => {
             } else if (dataString.includes("process_starts")) {
                 setReceivedMsg("");
             } else if (dataString.includes("process_generating")) {
-                const response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"")[0];
-                console.log(response);
+                const response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"]")[0];
+                // console.log(response);
                 setReceivedMsg(receivedMsg + response);
             }
         });
