@@ -30,11 +30,13 @@ const MainChat = () => {
      * */
 
     const [socket, setSocket] = useState<Socket>();
-    const [receivedMsg, setReceivingMsg] = useState("");
+    const [receivedMsg, setReceivedMsg] = useState("");
+    const [receivingMsg, setReceivingMsg] = useState(false);
 
     useEffect(() => {
         // connect to WebSocket server
-        const newSocket = io("http://localhost:8080");
+        // const newSocket = io("http://localhost:5000");
+        const newSocket = io("wss://12d3-35-203-157-221.ngrok-free.app/queue/join");
         setSocket(newSocket);
 
         // set up event listeners for incoming messages
@@ -45,9 +47,11 @@ const MainChat = () => {
         newSocket.on("message", (data) => {
             if (data === "$$$") {
                 // end of message
-                setReceivingMsg("");
+                setReceivedMsg("");
+                setReceivingMsg(false);
             } else {
-                setReceivingMsg(receivedMsg + data);
+                console.log(data);
+                // setReceivedMsg(receivedMsg + data);
             }
         });
 
@@ -65,7 +69,8 @@ const MainChat = () => {
 
         if (socket)
             socket.emit("message", currentMessage);
-        setMessageQueue([...messageQueue, {sender: SENDER_TYPE_USER, content: currentMessage}]);
+        setMessageQueue([...messageQueue, {sender: SENDER_TYPE_USER, content: currentMessage}, {sender: SENDER_TYPE_BOT, content: ""}]);
+        setReceivingMsg(true);
         setCurrentMessage("");
     }
 
@@ -90,7 +95,7 @@ const MainChat = () => {
             "
         >
             <TextArea messageQueue={messageQueue}/>
-            <MessageInputBox sendMessage={sendMessage} msg={currentMessage} setMsg={setCurrentMessage}/>
+            <MessageInputBox sendMessage={sendMessage} msg={currentMessage} setMsg={setCurrentMessage} canSend={receivingMsg}/>
         </Card>
     );
 };

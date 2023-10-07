@@ -6,9 +6,10 @@ type MessageInputBoxProps = {
     sendMessage: any;
     msg: string;
     setMsg: any;
+    canSend: boolean;
 }
 
-const MessageInputBox = ({sendMessage, msg, setMsg}: MessageInputBoxProps) => {
+const MessageInputBox = ({sendMessage, msg, setMsg, canSend}: MessageInputBoxProps) => {
 
     const onMsgChange = (event: any) => {
         setMsg(event.target.value);
@@ -37,6 +38,7 @@ const MessageInputBox = ({sendMessage, msg, setMsg}: MessageInputBoxProps) => {
                     p-0
                 "
                 type="submit"
+                disabled={!canSend}
             >
                 <AiOutlineSend size='1.2em'/>
             </Button>
