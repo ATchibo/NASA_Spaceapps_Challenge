@@ -3,7 +3,6 @@ import {Card} from "flowbite-react";
 import TextArea from "./TextArea";
 import MessageInputBox from "./MessageInputBox";
 import {useIntl} from "react-intl";
-import {io, Socket} from "socket.io-client";
 
 export type Message = {
     sender: string;
@@ -29,36 +28,25 @@ const MainChat = () => {
      * Websocket Connection
      * */
 
-    const [socket, setSocket] = useState<Socket>();
+    const [socket, setSocket] = useState<WebSocket>();
     const [receivedMsg, setReceivedMsg] = useState("");
     const [receivingMsg, setReceivingMsg] = useState(false);
 
     useEffect(() => {
         // connect to WebSocket server
-        const newSocket = io("http://localhost:5000");
-        // const newSocket = io("wss://12d3-35-203-157-221.ngrok-free.app/queue/join");
-        setSocket(newSocket);
 
-        // set up event listeners for incoming messages
-        newSocket.on("connect", () => console.log("Connected to WebSocket"));
-        newSocket.on("disconnect", () =>
-            console.log("Disconnected from WebSocket")
-        );
-        newSocket.on("message", (data) => {
-            if (data === "$$$") {
+        const socket = new WebSocket('ws://localhost:5000/echo');
+        socket.addEventListener('message', ev => {
+            if (ev.data === "$$$") {
                 // end of message
                 setReceivedMsg("");
                 setReceivingMsg(false);
             } else {
-                console.log(data);
-                // setReceivedMsg(receivedMsg + data);
+                console.log(ev.data);
+                setReceivedMsg(receivedMsg + ev.data);
             }
         });
-
-        // clean up on unmount
-        return () => {
-            newSocket.disconnect();
-        };
+        setSocket(socket);
     }, []);
 
     const sendMessage = (event: any) => {
@@ -68,7 +56,7 @@ const MainChat = () => {
             return;
 
         if (socket)
-            socket.emit("message", currentMessage);
+            socket.send(currentMessage);
         setMessageQueue([...messageQueue, {sender: SENDER_TYPE_USER, content: currentMessage}, {sender: SENDER_TYPE_BOT, content: ""}]);
         setReceivingMsg(true);
         setCurrentMessage("");

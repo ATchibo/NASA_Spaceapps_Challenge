@@ -38,7 +38,7 @@ const MessageInputBox = ({sendMessage, msg, setMsg, canSend}: MessageInputBoxPro
                     p-0
                 "
                 type="submit"
-                disabled={!canSend}
+                // disabled={canSend}
             >
                 <AiOutlineSend size='1.2em'/>
             </Button>
