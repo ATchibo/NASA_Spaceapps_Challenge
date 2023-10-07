@@ -35,7 +35,8 @@ const MainChat = () => {
     useEffect(() => {
         // connect to WebSocket server
 
-        const socket = new WebSocket('ws://localhost:5000/echo');
+        // const socket = new WebSocket('ws://localhost:5000/echo');
+        const socket = new WebSocket('wss://316c-35-203-157-221.ngrok-free.app/queue/join');
         socket.addEventListener('message', ev => {
             if (ev.data === "$$$") {
                 // end of message
