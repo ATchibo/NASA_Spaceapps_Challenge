@@ -35,8 +35,8 @@ const MainChat = () => {
 
     useEffect(() => {
         // connect to WebSocket server
-        // const newSocket = io("http://localhost:5000");
-        const newSocket = io("wss://12d3-35-203-157-221.ngrok-free.app/queue/join");
+        const newSocket = io("http://localhost:5000");
+        // const newSocket = io("wss://12d3-35-203-157-221.ngrok-free.app/queue/join");
         setSocket(newSocket);
 
         // set up event listeners for incoming messages
