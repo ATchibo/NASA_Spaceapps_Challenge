@@ -6,7 +6,7 @@ const api = axios.create({
     baseURL: BACKEND_URL,
 });
 
-export const sendMessage = async () => {
+export const sendMessageApi = async (message: string) => {
     const res = await api.post("/sendMessage");
     return res.data;
 }

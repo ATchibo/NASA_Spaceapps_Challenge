@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card} from "flowbite-react";
 import TextArea from "./TextArea";
 import MessageInputBox from "./MessageInputBox";
@@ -13,19 +13,47 @@ const MainChat = () => {
 
     const intl = useIntl();
 
+    const SENDER_TYPE_BOT = intl.formatMessage({id: "sender_type_bot"})
+    const SENDER_TYPE_USER = intl.formatMessage({id: "sender_type_user"})
+    const INITIAL_BOT_MESSAGE = intl.formatMessage({id: "initial_msg_bot"})
+
     const [messageQueue, setMessageQueue] = useState<Message[]>([{
-        sender: intl.formatMessage({id: "sender_type_bot"}),
-        content: intl.formatMessage({id: "initial_msg_bot"})
+        sender: SENDER_TYPE_BOT,
+        content: INITIAL_BOT_MESSAGE
     }]);
 
+    const [msgToSend, setMsgToSend] = useState("");
+
+    // const {
+    //     data: sendMessageData,
+    //     isFetching: isSendMessageFetching,
+    //     isSuccess: isSendMessageSuccess,
+    //     refetch: refetchSendMessage
+    // } = useQuery(
+    //     ["sendMessage", msgToSend],
+    //     () => sendMessageApi(msgToSend),
+    //     {
+    //         enabled: false
+    //     }
+    // )
 
     const [currentMessage, setCurrentMessage] = useState("");
     const sendMessage = (event: any) => {
         event.preventDefault();
 
-        console.log(currentMessage);
+        if (currentMessage.length === 0)
+            return;
+
+        setMsgToSend(currentMessage);
         setCurrentMessage("");
     }
+
+    useEffect(() => {
+        if (msgToSend.length > 0) {
+            setMessageQueue([...messageQueue, {sender: SENDER_TYPE_USER, content: msgToSend}]);
+            setMsgToSend("");
+        }
+    }, [msgToSend]);
 
     return (
         <Card
