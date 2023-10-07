@@ -54,7 +54,7 @@ const MainChat = () => {
         return new WebSocket('wss://fded-34-125-27-194.ngrok-free.app/queue/join');
     }
 
-    const sessionHash = "ifonas1sp2";
+    const sessionHash = "lji2pmsp8uk";
     const closeEvent = "close";
 
     const step1 = () => {
@@ -147,7 +147,7 @@ const MainChat = () => {
                         true,
                         "",
                         "",
-                        "ChatLLM",
+                        "UserData",
                         "Query",
                         3,
                         true,
@@ -246,7 +246,7 @@ const MainChat = () => {
                         true,
                         "",
                         "",
-                        "ChatLLM",
+                        "UserData",
                         "Query",
                         3,
                         true,
@@ -405,7 +405,7 @@ const MainChat = () => {
                         true,
                         "",
                         "",
-                        "ChatLLM",
+                        "UserData",
                         "Query",
                         3,
                         true,
