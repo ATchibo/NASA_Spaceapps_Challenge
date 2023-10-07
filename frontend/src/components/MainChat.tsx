@@ -50,7 +50,7 @@ const MainChat = () => {
     const [receivingMsg, setReceivingMsg] = useState(false);
 
     const connectToWebsocket = () => {
-        return new WebSocket('wss://d209-34-68-109-71.ngrok-free.app/queue/join');
+        return new WebSocket('wss://fded-34-125-27-194.ngrok-free.app/queue/join');
     }
 
     const sessionHash = "ifonas1sp2";
@@ -102,10 +102,12 @@ const MainChat = () => {
 
         console.log("ma conectez la sock:", socket);
 
-        socket?.send(JSON.stringify({
-            fn_index: currentFnIndex,
-            session_hash: sessionHash
-        }));
+        socket.addEventListener("add", (ev) => {
+            socket.send(JSON.stringify({
+                fn_index: currentFnIndex,
+                session_hash: sessionHash
+            }));
+        });
 
         console.log("socket after send:", socket);
 
@@ -114,7 +116,14 @@ const MainChat = () => {
 
             console.log("avem date:", ev.data);
 
-            if (dataString.includes("send_data")) {
+            if (dataString.includes("send_hash")) {
+                console.log("send hash")
+
+                socket?.send(JSON.stringify({
+                    fn_index: currentFnIndex,
+                    session_hash: sessionHash
+                }));
+            } else if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [
                         msgToSend,
@@ -196,15 +205,24 @@ const MainChat = () => {
 
         // step 4/7
         const socket = connectToWebsocket();
-        socket?.send(JSON.stringify({
-            fn_index: currentFnIndex,
-            session_hash: sessionHash
-        }));
+        socket.addEventListener("add", (ev) => {
+            socket.send(JSON.stringify({
+                fn_index: currentFnIndex,
+                session_hash: sessionHash
+            }));
+        });
 
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString.includes("send_data")) {
+            if (dataString.includes("send_hash")) {
+                console.log("send hash")
+
+                socket?.send(JSON.stringify({
+                    fn_index: currentFnIndex,
+                    session_hash: sessionHash
+                }));
+            } else if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [
                         msgToSend,
@@ -256,15 +274,24 @@ const MainChat = () => {
 
         // step 5/7
         const socket = connectToWebsocket();
-        socket?.send(JSON.stringify({
-            fn_index: currentFnIndex,
-            session_hash: sessionHash
-        }));
+        socket.addEventListener("add", (ev) => {
+            socket.send(JSON.stringify({
+                fn_index: currentFnIndex,
+                session_hash: sessionHash
+            }));
+        });
 
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString.includes("send_data")) {
+            if (dataString.includes("send_hash")) {
+                console.log("send hash")
+
+                socket?.send(JSON.stringify({
+                    fn_index: currentFnIndex,
+                    session_hash: sessionHash
+                }));
+            } else if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [],
                     event_data: null,
@@ -286,15 +313,24 @@ const MainChat = () => {
 
         // step 6/7
         const socket = connectToWebsocket();
-        socket?.send(JSON.stringify({
-            fn_index: currentFnIndex,
-            session_hash: sessionHash
-        }));
+        socket.addEventListener("add", (ev) => {
+            socket.send(JSON.stringify({
+                fn_index: currentFnIndex,
+                session_hash: sessionHash
+            }));
+        });
 
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString.includes("send_data")) {
+            if (dataString.includes("send_hash")) {
+                console.log("send hash")
+
+                socket?.send(JSON.stringify({
+                    fn_index: currentFnIndex,
+                    session_hash: sessionHash
+                }));
+            } else if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [],
                     event_data: null,
@@ -316,15 +352,24 @@ const MainChat = () => {
 
         // step 7/7
         const socket = connectToWebsocket();
-        socket?.send(JSON.stringify({
-            fn_index: currentFnIndex,
-            session_hash: sessionHash
-        }));
+        socket.addEventListener("add", (ev) => {
+            socket.send(JSON.stringify({
+                fn_index: currentFnIndex,
+                session_hash: sessionHash
+            }));
+        });
 
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString.includes("send_data")) {
+            if (dataString.includes("send_hash")) {
+                console.log("send hash")
+
+                socket?.send(JSON.stringify({
+                    fn_index: currentFnIndex,
+                    session_hash: sessionHash
+                }));
+            } else if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [
                         msgToSend,
@@ -355,17 +400,23 @@ const MainChat = () => {
                         [
                             "All_Relevant"
                         ],
-                        []
+                        null,
+                        null,
+                        [[msgToSend, null]]
                     ],
                     event_data: null,
                     fn_index: currentFnIndex,
                     session_hash: sessionHash
                 }));
-            } else if (dataString === "{\"msg\":\"process_starts\"}") {
+            } else if (dataString.includes("process_starts")) {
                 setReceivedMsg("");
                 setReceivingMsg(false);
-            } else if (dataString.includes("{\"msg\":\"process_generating\"")) {
-                setReceivedMsg(receivedMsg + ev.data.output.data[0][0][1]);
+            } else if (dataString.includes("process_generating")) {
+                console.log(ev.data);
+
+                const response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"")[0];
+                console.log(response);
+                setReceivedMsg(receivedMsg + response);
             }
         });
         socket?.addEventListener(closeEvent, ev => {
