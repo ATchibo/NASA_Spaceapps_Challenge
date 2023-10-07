@@ -50,10 +50,12 @@ const MainChat = () => {
 
     const connectToWebsocket = () => {
         const socket = new WebSocket('wss://316c-35-203-157-221.ngrok-free.app/queue/join');
+        console.log("socket:", socket);
         setSocket(socket);
     }
 
     const sessionHash = "ifonas1sp2";
+    const closeEvent = "close";
 
     const step1 = () => {
         var currentFnIndex = fnIndex;
@@ -78,7 +80,7 @@ const MainChat = () => {
                 }));
             }
         });
-        socket?.addEventListener('disconnect', ev => {
+        socket?.addEventListener(closeEvent, ev => {
             step2();
         })
     }
@@ -136,7 +138,7 @@ const MainChat = () => {
                 }));
             }
         });
-        socket?.addEventListener('disconnect', ev => {
+        socket?.addEventListener(closeEvent, ev => {
             step3();
         })
     }
@@ -164,7 +166,7 @@ const MainChat = () => {
                 }));
             }
         });
-        socket?.addEventListener('disconnect', ev => {
+        socket?.addEventListener(closeEvent, ev => {
             step4();
         })
     }
@@ -222,7 +224,7 @@ const MainChat = () => {
                 }));
             }
         });
-        socket?.addEventListener('disconnect', ev => {
+        socket?.addEventListener(closeEvent, ev => {
             step5();
         })
     }
@@ -250,7 +252,7 @@ const MainChat = () => {
                 }));
             }
         });
-        socket?.addEventListener('disconnect', ev => {
+        socket?.addEventListener(closeEvent, ev => {
             step6();
         })
     }
@@ -278,7 +280,7 @@ const MainChat = () => {
                 }));
             }
         });
-        socket?.addEventListener('disconnect', ev => {
+        socket?.addEventListener(closeEvent, ev => {
             step7();
         })
     }
@@ -341,7 +343,7 @@ const MainChat = () => {
                 setReceivedMsg(receivedMsg + ev.data.output.data[0][0][1]);
             }
         });
-        socket?.addEventListener('disconnect', ev => {
+        socket?.addEventListener(closeEvent, ev => {
             console.log("gata bos")
         })
     }
