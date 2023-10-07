@@ -24,6 +24,7 @@ const MainChat = () => {
 
     const [currentMessage, setCurrentMessage] = useState("");
     const [msgToSend, setMsgToSend] = useState("");
+    const [wsIndex, setWsIndex] = useState(-1);
 
     const sendMessage = (event: any) => {
         event.preventDefault();
@@ -36,6 +37,7 @@ const MainChat = () => {
         setMsgToSend(currentMessage);
         setCurrentMessage("");
 
+        console.log("starting sending msg");
         startSendingMessage();
     }
 
@@ -43,15 +45,12 @@ const MainChat = () => {
      * Websocket Connection
      * */
 
-    const [socket, setSocket] = useState<WebSocket>();
     const [fnIndex, setFnIndex] = useState(36);
     const [receivedMsg, setReceivedMsg] = useState("");
     const [receivingMsg, setReceivingMsg] = useState(false);
 
     const connectToWebsocket = () => {
-        const socket = new WebSocket('wss://316c-35-203-157-221.ngrok-free.app/queue/join');
-        console.log("socket:", socket);
-        setSocket(socket);
+        return new WebSocket('wss://d209-34-68-109-71.ngrok-free.app/queue/join');
     }
 
     const sessionHash = "ifonas1sp2";
@@ -59,19 +58,25 @@ const MainChat = () => {
 
     const step1 = () => {
         var currentFnIndex = fnIndex;
-        setFnIndex(currentFnIndex + 1);
+        // setFnIndex(currentFnIndex + 1);
 
         // step 1/7
-        connectToWebsocket();
+        const socket = connectToWebsocket();
+
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString === "{\"msg\":\"send_hash\"}\n") {
+            if (dataString.includes("send_hash")) {
+                console.log("send hash")
+
                 socket?.send(JSON.stringify({
                     fn_index: currentFnIndex,
                     session_hash: sessionHash
                 }));
-            } else if (dataString === "{\"msg\":\"send_data\"}\n") {
+            } else if (dataString.includes("send_data")) {
+
+                console.log("send data")
+
                 socket?.send(JSON.stringify({
                     data: [msgToSend],
                     event_data: null,
@@ -81,25 +86,35 @@ const MainChat = () => {
             }
         });
         socket?.addEventListener(closeEvent, ev => {
-            step2();
+            console.log("se inchide");
+            // step2();
+            setFnIndex(currentFnIndex + 1);
+            setWsIndex(wsIndex + 1);
         })
     }
 
     const step2 = () => {
         var currentFnIndex = fnIndex;
-        setFnIndex(currentFnIndex + 1);
+        // setFnIndex(currentFnIndex + 1);
 
         // step 2/7
-        connectToWebsocket();
+        const socket = connectToWebsocket();
+
+        console.log("ma conectez la sock:", socket);
+
         socket?.send(JSON.stringify({
             fn_index: currentFnIndex,
             session_hash: sessionHash
         }));
 
+        console.log("socket after send:", socket);
+
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString === "{\"msg\":\"send_data\"}\n") {
+            console.log("avem date:", ev.data);
+
+            if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [
                         msgToSend,
@@ -139,25 +154,27 @@ const MainChat = () => {
             }
         });
         socket?.addEventListener(closeEvent, ev => {
-            step3();
+            // step3();
+            setFnIndex(currentFnIndex + 1);
+            setWsIndex(wsIndex + 1);
         })
     }
 
     const step3 = () => {
         var currentFnIndex = fnIndex;
-        setFnIndex(currentFnIndex + 1);
+        // setFnIndex(currentFnIndex + 1);
 
         // step 3/7
-        connectToWebsocket();
+        const socket = connectToWebsocket();
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString === "{\"msg\":\"send_hash\"}\n") {
+            if (dataString.includes("send_hash")) {
                 socket?.send(JSON.stringify({
                     fn_index: currentFnIndex,
                     session_hash: sessionHash
                 }));
-            } else if (dataString === "{\"msg\":\"send_data\"}\n") {
+            } else if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [],
                     event_data: null,
@@ -167,16 +184,18 @@ const MainChat = () => {
             }
         });
         socket?.addEventListener(closeEvent, ev => {
-            step4();
+            // step4();
+            setFnIndex(currentFnIndex + 1);
+            setWsIndex(wsIndex + 1);
         })
     }
 
     const step4 = () => {
         var currentFnIndex = fnIndex;
-        setFnIndex(currentFnIndex + 1);
+        // setFnIndex(currentFnIndex + 1);
 
-        // step 3/7
-        connectToWebsocket();
+        // step 4/7
+        const socket = connectToWebsocket();
         socket?.send(JSON.stringify({
             fn_index: currentFnIndex,
             session_hash: sessionHash
@@ -185,7 +204,7 @@ const MainChat = () => {
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString === "{\"msg\":\"send_data\"}\n") {
+            if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [
                         msgToSend,
@@ -225,16 +244,18 @@ const MainChat = () => {
             }
         });
         socket?.addEventListener(closeEvent, ev => {
-            step5();
+            // step5();
+            setFnIndex(currentFnIndex + 1);
+            setWsIndex(wsIndex + 1);
         })
     }
 
     const step5 = () => {
         var currentFnIndex = fnIndex;
-        setFnIndex(currentFnIndex + 1);
+        // setFnIndex(currentFnIndex + 1);
 
-        // step 3/7
-        connectToWebsocket();
+        // step 5/7
+        const socket = connectToWebsocket();
         socket?.send(JSON.stringify({
             fn_index: currentFnIndex,
             session_hash: sessionHash
@@ -243,7 +264,7 @@ const MainChat = () => {
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString === "{\"msg\":\"send_data\"}\n") {
+            if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [],
                     event_data: null,
@@ -253,16 +274,18 @@ const MainChat = () => {
             }
         });
         socket?.addEventListener(closeEvent, ev => {
-            step6();
+            // step6();
+            setFnIndex(currentFnIndex + 1);
+            setWsIndex(wsIndex + 1);
         })
     }
 
     const step6 = () => {
         var currentFnIndex = fnIndex;
-        setFnIndex(currentFnIndex + 1);
+        // setFnIndex(currentFnIndex + 1);
 
-        // step 3/7
-        connectToWebsocket();
+        // step 6/7
+        const socket = connectToWebsocket();
         socket?.send(JSON.stringify({
             fn_index: currentFnIndex,
             session_hash: sessionHash
@@ -271,7 +294,7 @@ const MainChat = () => {
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString === "{\"msg\":\"send_data\"}\n") {
+            if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [],
                     event_data: null,
@@ -281,7 +304,9 @@ const MainChat = () => {
             }
         });
         socket?.addEventListener(closeEvent, ev => {
-            step7();
+            // step7();
+            setFnIndex(currentFnIndex + 1);
+            setWsIndex(wsIndex + 1);
         })
     }
 
@@ -289,8 +314,8 @@ const MainChat = () => {
         var currentFnIndex = fnIndex;
         setFnIndex(currentFnIndex + 1);
 
-        // step 3/7
-        connectToWebsocket();
+        // step 7/7
+        const socket = connectToWebsocket();
         socket?.send(JSON.stringify({
             fn_index: currentFnIndex,
             session_hash: sessionHash
@@ -299,7 +324,7 @@ const MainChat = () => {
         socket?.addEventListener('message', ev => {
             const dataString = JSON.stringify(ev.data);
 
-            if (dataString === "{\"msg\":\"send_data\"}\n") {
+            if (dataString.includes("send_data")) {
                 socket?.send(JSON.stringify({
                     data: [
                         msgToSend,
@@ -345,12 +370,40 @@ const MainChat = () => {
         });
         socket?.addEventListener(closeEvent, ev => {
             console.log("gata bos")
+            setFnIndex(currentFnIndex + 1);
+            setWsIndex(-1);
         })
     }
 
     const startSendingMessage = () => {
-        step1();
+        setWsIndex(1);
     }
+
+    useEffect(() => {
+        switch (wsIndex) {
+            case 1:
+                step1();
+                break;
+            case 2:
+                step2();
+                break;
+            case 3:
+                step3();
+                break;
+            case 4:
+                step4();
+                break;
+            case 5:
+                step5();
+                break;
+            case 6:
+                step6();
+                break;
+            case 7:
+                step7();
+                break;
+        }
+    }, [wsIndex]);
 
     // useEffect(() => {
     //     // connect to WebSocket server
