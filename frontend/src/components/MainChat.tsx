@@ -3,6 +3,7 @@ import {Card} from "flowbite-react";
 import TextArea from "./TextArea";
 import MessageInputBox from "./MessageInputBox";
 import {useIntl} from "react-intl";
+import {linksDict} from "./Dictionary";
 
 export type Message = {
     sender: string;
@@ -17,9 +18,14 @@ const MainChat = () => {
     const SENDER_TYPE_USER = intl.formatMessage({id: "sender_type_user"})
     const INITIAL_BOT_MESSAGE = intl.formatMessage({id: "initial_msg_bot"})
 
+    const temp = "<p>test <b>test bold</b> <i>test italic</i>" +
+        "<ul><li>unu</li><li>doi</li><li><a href='www.google.com'>gugle</a></li></ul>"
+
+
     const [messageQueue, setMessageQueue] = useState<Message[]>([{
         sender: SENDER_TYPE_BOT,
-        content: INITIAL_BOT_MESSAGE
+        content: INITIAL_BOT_MESSAGE,
+        // content: temp
     }]);
 
     const [currentMessage, setCurrentMessage] = useState("");
@@ -36,8 +42,6 @@ const MainChat = () => {
         setReceivingMsg(true);
         setMsgToSend(currentMessage);
         setCurrentMessage("");
-
-        console.log("starting sending msg");
         setReceivedMsg("");
         startSendingMessage();
     }
@@ -51,10 +55,10 @@ const MainChat = () => {
     const [receivingMsg, setReceivingMsg] = useState(false);
 
     const connectToWebsocket = () => {
-        return new WebSocket('wss://fded-34-125-27-194.ngrok-free.app/queue/join');
+        return new WebSocket('wss://e038-34-125-61-168.ngrok-free.app/queue/join');
     }
 
-    const sessionHash = "ifonas1sp2";
+    const sessionHash = "lji2pmsp8uk";
     const closeEvent = "close";
 
     const step1 = () => {
@@ -147,7 +151,7 @@ const MainChat = () => {
                         true,
                         "",
                         "",
-                        "ChatLLM",
+                        "UserData",
                         "Query",
                         3,
                         true,
@@ -246,7 +250,7 @@ const MainChat = () => {
                         true,
                         "",
                         "",
-                        "ChatLLM",
+                        "UserData",
                         "Query",
                         3,
                         true,
@@ -405,7 +409,7 @@ const MainChat = () => {
                         true,
                         "",
                         "",
-                        "ChatLLM",
+                        "UserData",
                         "Query",
                         3,
                         true,
@@ -424,9 +428,22 @@ const MainChat = () => {
             } else if (dataString.includes("process_starts")) {
                 setReceivedMsg("");
             } else if (dataString.includes("process_generating")) {
-                const response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"")[0];
-                console.log(response);
-                setReceivedMsg(receivedMsg + response);
+                let response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"]")[0];
+                // console.log(response);
+                response = receivedMsg + response;
+
+                for (let [key, value] of Object.entries(linksDict)) {
+
+                    console.log("cheie:", key);
+                    if (response.includes(key)) {
+                        console.log("include", key);
+                        console.log("replace with:", value);
+                        response = response.replaceAll(key, value);
+                        console.log("response after", response);
+                    }
+                }
+
+                setReceivedMsg(response);
             }
         });
         socket?.addEventListener(closeEvent, ev => {
@@ -467,7 +484,6 @@ const MainChat = () => {
     }, [wsIndex]);
 
     useEffect(() => {
-
         console.log("Received msg: ", receivedMsg);
 
         if (receivedMsg.length > 0) {
@@ -487,6 +503,7 @@ const MainChat = () => {
                 max-w-7xl
                 w-[calc(100%-2rem)]
                 h-[calc(100vh-12rem)]
+                bg-gray-100
             "
         >
             <TextArea messageQueue={messageQueue}/>
