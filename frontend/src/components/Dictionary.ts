@@ -9,4 +9,6 @@ export const linksDict = {
     "\\n": "<br>",
     "\n": "<br>",
     "End Sources": "",
+    "<li>": "<li><b>",
+    "</li>": "</b></li>"
 }
