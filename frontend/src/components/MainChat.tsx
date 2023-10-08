@@ -3,6 +3,7 @@ import {Card} from "flowbite-react";
 import TextArea from "./TextArea";
 import MessageInputBox from "./MessageInputBox";
 import {useIntl} from "react-intl";
+import {linksDict} from "./Dictionary";
 
 export type Message = {
     sender: string;
@@ -17,9 +18,14 @@ const MainChat = () => {
     const SENDER_TYPE_USER = intl.formatMessage({id: "sender_type_user"})
     const INITIAL_BOT_MESSAGE = intl.formatMessage({id: "initial_msg_bot"})
 
+    const temp = "<p>test <b>test bold</b> <i>test italic</i>" +
+        "<ul><li>unu</li><li>doi</li><li><a href='www.google.com'>gugle</a></li></ul>"
+
+
     const [messageQueue, setMessageQueue] = useState<Message[]>([{
         sender: SENDER_TYPE_BOT,
-        content: INITIAL_BOT_MESSAGE
+        content: INITIAL_BOT_MESSAGE,
+        // content: temp
     }]);
 
     const [currentMessage, setCurrentMessage] = useState("");
@@ -467,8 +473,13 @@ const MainChat = () => {
     }, [wsIndex]);
 
     useEffect(() => {
-
         console.log("Received msg: ", receivedMsg);
+
+        for (let [key, value] of Object.entries(linksDict)) {
+            if (receivedMsg.includes(key)) {
+                receivedMsg.replace(key, value);
+            }
+        }
 
         if (receivedMsg.length > 0) {
             setMessageQueue([...messageQueue.slice(0, messageQueue.length-1), {sender: SENDER_TYPE_BOT, content: receivedMsg}]);
