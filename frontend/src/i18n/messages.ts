@@ -2,7 +2,7 @@ import {LOCALES} from "./locales";
 
 export const messages = {
     [LOCALES.ENGLISH]: {
-        app_title: "Iternet Explorer",
+        app_title: "Research Rover",
         main_page_title: "Start talking to your AI friend",
         sender_type_bot: "BOT",
         sender_type_user: "USER",
