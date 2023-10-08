@@ -42,8 +42,6 @@ const MainChat = () => {
         setReceivingMsg(true);
         setMsgToSend(currentMessage);
         setCurrentMessage("");
-
-        console.log("starting sending msg");
         setReceivedMsg("");
         startSendingMessage();
     }
@@ -498,7 +496,7 @@ const MainChat = () => {
                 max-w-7xl
                 w-[calc(100%-2rem)]
                 h-[calc(100vh-12rem)]
-                bg-gray-200
+                bg-gray-100
             "
         >
             <TextArea messageQueue={messageQueue}/>

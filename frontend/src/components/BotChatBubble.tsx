@@ -14,7 +14,7 @@ const BotChatBubble = ({message}: BotChatBubbleProps) => {
             className="
                 inline-flex
                 max-w-[calc(100%-15rem)]
-                bg-gray-300
+                bg-gray-200
                 mt-2
                 mb-2
             "
