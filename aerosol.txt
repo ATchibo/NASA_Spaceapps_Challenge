@@ -1,0 +1,143 @@
+Aerosol optical depth (AOD) is an assessment of the amount of visible and infrared light aerosols scatter or absorb in a column of the atmosphere, and is sometimes referred to as aerosol optical thickness (AOT). AOD is a unitless measure. From an observer on the ground, an AOD of less than 0.1 is characteristic of a clear sky, bright Sun, and maximum visibility. As AOD increases to 0.5, 1.0, and greater than 3.0, aerosols become so dense that the Sun is obscured.
+Commonly Used Aerosol Optical Depth (AOD) Data at a Glance
+
+Descriptions of these measurements will be reviewed in more detail later in this Data Pathfinder. The following sections will help guide you to topic-specific data and resources for accessing, visualizing, preparing/manipulating (e.g. subsetting), and analyzing data. Each observation, model, and reanalysis data has unique characteristics that should be considered when evaluating its use. 
+
+An asterisk (*) next to an entry indicates that near real-time (NRT) data products are available through NASA's Land, Atmosphere Near real-time Capability for EOS (LANCE). While not intended for scientific research, NRT data are good resources for monitoring ongoing or time-critical events. To learn more about the difference between NRT and Standard Science Products, see Near Real Time versus Standard Products.
+
+Earth Observation Data by Sensor
+MODIS
+
+Moderate Resolution Imaging Spectroradiometer (MODIS) instruments are aboard NASA’s Terra  (launched 1999) and Aqua (launched 2002) satellites and provide estimates about AOD. Terra's orbit is timed so that it passes from north to south across the equator in the morning, while Aqua passes south to north over the equator in the afternoon.
+
+MODIS daily data can be visualized and interactively explored using NASA Worldview:
+
+    MODIS AOD data in NASA Worldview
+
+The non-aerosol signal of surface reflectance needs to be separated from the aerosol signal to accurately obtain AOD. Scientists have developed two algorithms for MODIS data to account for these effects: Dark Target and Deep Blue. In the latest dataset collection, these two algorithms have been merged, using the highest quality for each. For more information about the differences between these, see What is the difference between dark target and deep blue?
+
+Dark Target and Deep Blue data can be interactively visualized using NASA Worldview:
+
+    MODIS Aqua/Terra Combined Algorithm AOD
+    The merged Dark Target/Deep Blue AOD layer provides a more global, synoptic view of AOD over land and ocean
+
+Using an online interactive tool called Giovanni, map visualizations of MODIS AOD data products can be downloaded as PNG images, or as GeoTIFF or KMZ files; time-series data are available as CSV data files, and animations are in either webm video format or animated GIF images:
+
+    MODIS Dark Target and Deep Blue AOD data
+
+Research quality MODIS data products can be accessed directly from Earthdata Search:
+
+    MODIS AOD Level 2 data from Earthdata Search
+    MODIS/Aqua AOD (3 km resolution, merged algorithm)
+    MODIS/Terra AOD (3 km resolution, merged algorithm)
+    MODIS Terra/Aqua-MAIAC Retrieval AOD  (1 km resolution)
+    Multi-angle Implementation of Atmospheric Correction (MAIAC) Land AOD utilizes a new advanced algorithm that uses time series (TMS) analysis and a combination of pixel- and image-based processing to improve the accuracy of cloud detection, aerosol retrievals, and atmospheric correction
+
+Near real-time (NRT) MODIS Surface Reflectance data are available through NASA’s Land, Atmosphere Near real-time Capability for EOS (LANCE) within 60 to 125 minutes after a satellite observation.
+
+MODIS/Terra and MODIS/Aqua NRT data in Earthdata Search:
+
+    L2 Aerosol, 5-Min Swath 10km
+    L2 Aerosol, 5-Min Swath 3km
+    L3 Value-added Aerosol Optical Depth
+    L3 Aerosol Optical Thickness, Climate Modeling Grid
+
+MODIS/Terra and MODIS/Aqua Combined NRT data in Earthdata Search:
+
+    L3 Value-added Aerosol Optical Depth
+    MODIS/Terra+Aqua Land Aerosol Optical Depth Daily L2G Global 1km SIN Grid (MAIAC)
+
+OMI
+
+The Ozone Monitoring Instrument (OMI) aboard NASA's Aura satellite has a coarser spatial resolution than MODIS and VIIRS, but provides data at individual wavelengths from the ultraviolet (UV) to the visible. This is important because pollutants have different spectral signatures. For example, a wavelength range around 400 nm can be used to detect elevated layers of absorbing aerosols such as biomass burning and desert dust plumes.
+
+Daily data can be accessed and interactively explored using NASA Worldview:
+
+    OMI AOD Multi-wavelength and UV
+
+Using an online interactive tool called Giovanni, map visualizations of OMI AOD data products can be downloaded as PNG images, or as GeoTIFF or KMZ files; time-series data are available as CSV data files, and animations are in either webm video format or animated GIF images:
+
+    OMI AOD
+        Within Giovanni, you can plot daily data at individual wavelengths
+        Benefits of using Giovanni to view these products:
+            The two AOD products provided through Giovanni use two different algorithms. The multi-wavelength layer and the UV absorbing layer displays the degree to which airborne particles (aerosols) prevent the transmission of light through the process of absorption (attenuation), and the UV extinction layer indicates the level at which particles in the air (aerosols) prevent light (extinction of light) from traveling through the atmosphere. Toggling between these can provide more distinction on the types of aerosols present.
+            OMI Multi-wavelength (OMAERO)
+                Based on the multi-wavelength algorithm and uses up to 20 wavelength bands between 331 nm and 500 nm. This algorithm uses reflectances for a wide variety of microphysical aerosol models representative of desert dust, biomass burning, volcanic, and weakly absorbing aerosol types. 
+            OMI UV (OMAERUV)
+                uses the near-UV algorithm, which is capable of retrieving aerosol properties over a wider variety of land surfaces than is possible using measurements only in the visible or near-IR because the reflectance of all terrestrial surfaces (not covered with snow) is small in the UV.
+
+EPIC
+
+The Earth Polychromatic Imaging Camera (EPIC) is a 10-channel spectroradiometer (317 to 780 nm) aboard NOAA’s Deep Space Climate Observatory (DSCOVR) spacecraft (which is a partnership between NASA, NOAA, and the U.S. Air Force). EPIC provides color images of the entire sunlit face of Earth at least once every two hours from 1 million miles away. DSCOVR’s location gives it a unique angular perspective that is used to measure ozone, aerosols, cloud reflectivity, cloud height, vegetation properties, and UV radiation estimates.
+
+Research quality data can be accessed using Earthdata Search:
+
+    EPIC UV Aerosol
+
+VIIRS
+
+The Visible Infrared Imaging Radiometer Suite (VIIRS) instruments aboard the NASA/NOAA Suomi National Polar-orbiting Partnership (Suomi NPP) and NOAA-20
+
+satellites collect AOD data at a finer spatial resolution than MODIS. VIIRS uses the Deep Blue algorithm over land and the Satellite Ocean Aerosol Retrieval (SOAR) algorithm over water to determine atmospheric aerosol loading for daytime cloud-free, snow-free scenes. Downloading a VIIRS data file provides the data with just the land algorithm, just the ocean algorithm, and the merged algorithm.
+
+Daily data can be accessed and interactively explored using NASA Worldview:
+
+    VIIRS Level 2 Deep Blue Aerosol Product
+    The product uses the Deep Blue algorithm over land and the SOAR algorithm over water to determine atmospheric aerosol loading. The product is designed to facilitate continuity in the aerosol record. Deep Blue uses measurements from multiple Earth observing satellites to determine the concentration of atmospheric aerosols along with the properties of these aerosols.
+
+Research quality data products can be accessed using Earthdata Search:
+
+    VIIRS AOD at 1° x 1°
+        Monthly global coverage
+    VIIRS AOD at 6 km (Deep Blue) (6 min)
+    VIIRS/SNPP AOD (Dark Target) L2 6-Min Swath 6 km
+
+Reanalysis Data
+MERRA-2
+
+The Modern-Era Retrospective analysis for Research and Applications version 2 (MERRA-2) offers a data assimilation of AOD analysis available every three hours from 1980 to present with a latency of about three weeks after the end of a month.
+
+Monthly data can be accessed and explored interactively using NASA Worldview:
+
+    Aerosol Optical Depth Analysis (Monthly)
+    Total Aerosol Optical Thickness Scattering 550nm (Monthly)
+    Total Aerosol Optical Thickness Extinction 550nm (Monthly)
+
+NASA's Global Modeling and Assimilation Office’s (GMAO) offers visualizations of MERRA-2 AOT data:
+
+    Animate and download weather maps for a variety of meteorological parameters, including MERRA-2 AOT map 
+        At the link above, you can visualize a variety of AOT parameters:  
+            Black Carbon
+            Dust
+            Fine
+            Organic Carbon
+            Sea Salt
+            Sulfate
+            Total
+
+Using an online interactive tool called Giovanni, map visualizations of MERRA-2-analyzed AOD data products can be downloaded as PNG images, or as GeoTIFF or KMZ files; time-series data are available as CSV data files, and animations are in either webm video format or animated GIF images:
+
+    MERRA-2 Aerosol Optical Depth Analysis (monthly mean)
+
+Research quality data products can be accessed using Earthdata Search and Google Earth Engine:
+
+    MERRA-2 Aerosol Optical Depth Analysis, 3-Hourly Data from Earthdata Search
+    MERRA-2 Aerosol Optical Depth Analysis, Monthly Mean Data from Earthdata Search
+    MERRA-2 Aerosol Diagnostics are available in the Google Earth Engine Data Catalog
+
+Ground-based Observation Data
+
+Thirty years of ground-based AOD measurements are available through NASA’s Aerosol Robotic Network (AERONET). AERONET is a global network of ground-based Sun photometers. These photometers calculate AOD and the amount of water vapor in the atmosphere by comparing the amount of light they detect with the amount of solar radiation that would be observed in an aerosol-free atmosphere. AERONET also takes sky brightness measurements that can be used to infer aerosol size distribution, refractive index, and single scattering albedo.
+
+    Aerosol Optical Depth (V3)-SOLAR Data Display
+    Download AERONET AOD data
+
+Field Campaign Observation Data
+ATom
+
+The Atmospheric Tomography Mission (ATom) is a NASA Earth Venture Suborbital-2 mission to study the impact of human-produced air pollution on greenhouse gases and on chemically reactive gases in the atmosphere. ATom deployed an extensive gas and aerosol payload on the NASA DC-8 aircraft for systematic, global-scale sampling of the atmosphere, profiling continuously from 0.2 to 12 km altitude. Around-the-world flights were conducted in each of four seasons between 2016 and 2018.
+
+    Find Aerosol ATom datasets in Earthdata Search
+    Browse ATom datasets
+
+at Oak Ridge National Laboratory Distributed Active Archive Center 

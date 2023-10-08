@@ -1,0 +1,103 @@
+Clouds form when suspended aerosols and water vapor get caught up in rising air motions. Natural aerosols such as mineral dust from deserts and sea salt have always served as nuclei on which water vapor condenses to form clouds. The amount of aerosols in the air is one of the most important factors for cloud formation. High amounts of human-made aerosols in the atmosphere can lead to heavier rainfall, while clouds with high levels of human-made aerosols can lead to delayed rainfall, which makes clouds grow larger, taller, and longer-lived. When they finally shed their water, storms may be stronger.
+Commonly Used Cloud Data at a Glance
+
+Descriptions of these measurements will be reviewed in more detail later in this Data Pathfinder. The following sections will help guide you to topic-specific data and resources for accessing, visualizing, preparing/manipulating (e.g. subsetting), and analyzing data. Each observation, model, and reanalysis data has unique characteristics that should be considered when evaluating its use.
+
+An asterisk (*) next to an entry indicates that near real-time (NRT) data products are available through NASA's Land, Atmosphere Near real-time Capability for EOS (LANCE). While not intended for scientific research, NRT data are good resources for monitoring ongoing or time-critical events. To learn more about the difference between NRT and Standard Science Products, see Near Real Time versus Standard Products.
+
+Earth Observation Data by Sensor
+AIRS
+
+AIRS, in conjunction with the Advanced Microwave Sounding Unit (AMSU), senses emitted infrared and microwave radiation from Earth to provide a 3D look at Earth's weather and climate. Working in tandem, the two instruments make simultaneous observations down to Earth's surface. With more than 2,000 channels sensing different regions of the atmosphere, the system creates a global 3D map of atmospheric temperature and humidity, cloud amounts and heights, greenhouse gas concentrations and many other atmospheric phenomena. Launched in 2002, the AIRS and AMSU instruments fly aboard NASA's Aqua spacecraft.
+
+Cloud top altitude is the pressure altitude calculated from the retrieved AIRS cloud top pressure assuming a surface pressure of 1000 hPa and a scale height of 6 kilometers. These are the approximate altitudes where clouds have infrared optical depths of unity. AIRS can sense up to two cloud decks in a column of atmosphere.
+
+AIRS data can be accessed and interactively explored using NASA Worldview:
+
+    Daily Cloud Top Height (km) (Day/Night) 
+
+Total Cloud Fraction is the product of cloud fractional coverage and cloud infrared emissivity. Low fraction can indicate either small, highly emissive clouds or more extensive but less emissive clouds.
+
+AIRS data can be accessed and interactively explored using NASA Worldview:
+
+    Total Cloud Fraction (fraction) (Day/Night) 
+
+Using an online interactive tool called Giovanni, map visualizations of AIRS Cloud data products can be downloaded as PNG images, or as GeoTIFF or KMZ files; time-series data are available as CSV data files, and animations are in either webm video format or animated GIF images:
+
+    AIRS Cloud data
+
+Research-quality data products can be accessed using Earthdata Search. Key Geophysical parameters including Fractional Cloud Cover, Cloud Top Height, Cloud Top Temperature:
+
+    AIRS/Aqua L2 Standard Physical Retrieval (AIRS-only) V006
+    AIRS/Aqua L2 Near Real Time (NRT) Standard Physical Retrieval (AIRS-only) V006
+
+AMSR2
+
+The AMSR2 instrument aboard the Japan Aerospace Exploration Agency Global Change Observation Mission-Water 1 (GCOM-W1) satellite is a conically scanning passive microwave radiometer. This instrument senses microwave radiation for 12 channels and 6 frequencies ranging from 6.9 GHz to 89 GHz.
+
+Near real-time (NRT) products are generated within 3 hours of the last observations in the file, by the Land, Atmosphere Near real-time Capability for EOS (LANCE). NRT products are generated in HDF-EOS-5 augmented with netCDF-4/CF metadata and are available from the LANCE. If data latency is not a primary concern, please consider using science quality products rather than NRT products.
+
+The Columnar Cloud Liquid Water parameter is a measure of the liquid water in a column of atmosphere in units of grams per square meter.
+
+AMSR2 data can be accessed and interactively explored using NASA Worldview:
+
+    Columnar Cloud Liquid Water (Day/Night) (Day/Night) 
+
+Research-quality data products can be accessed using Earthdata Search. Key Geophysical parameters within this product include: cloud liquid water over ocean
+
+    AMSR2 NRT Cloud Liquid Water Path data product
+
+MISR
+
+MISR aboard NASA's Terra satellite views Earth with cameras pointed at nine different angles. As the instrument flies overhead, each region of Earth's surface is successively imaged by all cameras in each of four wavelengths (blue, green, red, and near-infrared). MISR monitors monthly, seasonal, and long-term trends in three areas: 1) amount and type of atmospheric particles (aerosols), including those formed by natural sources and by human activities; 2) amounts, types, and heights of clouds, and 3) distribution of land surface cover, including vegetation canopy structure.
+
+The MISR Cloud Stereo Height product displays the fraction of global cloud stereo heights between 1.5 and 2.0 km calculated from MISR radiances averaged on a monthly basis. MISR stereo cloud heights are geometric calculations of the height of cloud tops based on the angular displacement (parallax) of clouds across the nine angles captured by MISR’s cameras.
+
+MISR data can be accessed and interactively explored using NASA Worldview:
+
+    Cloud Stereo Height (km) (Day/Night)
+
+MODIS
+
+The Moderate Resolution Imaging Spectroradiometer (MODIS) continually collects data in 36 spectral channels with global coverage every 1 to 2 days. Its exceptionally broad spectral range enables MODIS data to be used in studies across numerous disciplines, including vegetative health, changes in land cover and land use, oceans and ocean biology, sea surface temperature, and cloud analysis. It also is used extensively for monitoring fires and natural hazards along with oil spills. An important attribute of MODIS data is the availability of MODIS data products in real-time and near real-time. Direct broadcast stations around the world download raw MODIS data in real-time directly from the satellite, while NASA’s Land, Atmosphere Near Real-time Capability for EOS (LANCE) provides several MODIS products within three hours of satellite observation. 
+
+Aqua/MODIS and MODIS/Terra cloud data can be accessed and interactively explored using NASA Worldview:
+
+    Cloud Optical Thickness: Aqua/MODIS, Terra/MODIS
+    Cloud Fraction (Day/Night): Aqua/MODIS, Terra/MODIS
+    Cloud Phase (Day/Night): Aqua/MODIS, Terra/MODIS
+    Cloud Effective Radius: Aqua/MODIS, Terra/MODIS
+    Cloud Top Height: Aqua/MODIS, Terra/MODIS
+    Cloud Water Path: Aqua/MODIS, Terra/MODIS
+
+Using an online interactive tool called Giovanni, map visualizations of MODIS Cloud data products can be downloaded as PNG images, or as GeoTIFF or KMZ files; time-series data are available as CSV data files, and animations are in either webm video format or animated GIF images:
+
+    Cloud Optical Depth/Thickness (daily/monthly): Aqua/MODIS, Terra/MODIS
+    Cloud Fraction (daily/monthly): Aqua/MODIS, Terra/MODIS
+    Cloud Effective Radius: Aqua/MODIS, Terra/MODIS
+    Cloud Water Path: Aqua/MODIS, Terra/MODIS
+
+Research-quality data products can be accessed using Earthdata Search. Key Geophysical parameters within this product include: Cloud Optical Thickness, Fraction, Water Path, Cloud Top Temperature, Cloud Height and more:
+
+    MODIS/Terra Clouds 5-Min L2 Swath 1km and 5km 
+    MODIS/Terra Clouds 5-Min L2 Swath 1km and 5km - NRT
+    MODIS/Aqua Clouds 5-Min L2 Swath 1km and 5km
+    MODIS/Aqua Cloud Mask and Spectral Test Results 5-Min L2 Swath 250m and 1km - NRT  
+
+Reanalysis Data
+MERRA-2
+
+The Modern-Era Retrospective analysis for Research and Applications, Version 2 (MERRA-2) is the latest version of global atmospheric reanalysis for the satellite era produced by NASA’s Global Modeling and Assimilation Office (GMAO) using the Goddard Earth Observing System Model (GEOS) version 5.12.4. The dataset covers the period of 1980 to present with the latency of about 3 weeks after the end of a month.
+
+The ISCCP Cloud Albedo (Monthly) layer is created from a time-averaged two-dimensional monthly mean data collection. This data collection consists of parameters from the Cloud Feedback Model Intercomparison Project (CFMIP) Observations Simulator Package (COSP), such as International Satellite Cloud Climatology Project (ISCCP) total cloud area fraction, MODIS cloud fraction water (ice) mean, MODIS cloud fraction low (mid,high) mean, MODIS cloud particle size water (ice) mean.
+
+MERRA-2 Cloud Albedo (Monthly) data can be accessed and interactively explored using NASA Worldview:
+
+    MERRA-2 ISCCP Cloud Albedo
+
+Using an online interactive tool called Giovanni, map visualizations of MERRA-2 Cloud data products can be downloaded as PNG images, or as GeoTIFF or KMZ files; time-series data are available as CSV data files, and animations are in either webm video format or animated GIF images:
+
+    MERRA-2 Cloud Optical Depth/Thickness
+    MERRA-2 Cloud Fraction 
+    MERRA-2 Cloud Effective Radius 
+    MERRA-2 Cloud Water Path

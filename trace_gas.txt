@@ -1,0 +1,70 @@
+Nitrogen dioxide (NO2) is a pollutant, the primary sources of which are automobile exhaust, smoke from industry, and the burning of fossil fuels. If breathed in, NO2 can aggravate respiratory conditions such as asthma. Long-term exposure can lead to the development of asthma and potentially increase susceptibility to respiratory infections. NO2 reacts with other chemicals in the atmosphere, forming particulate matter and ozone, producing haze and acid rain, and contributing to nitrogen pollution in coastal waters.
+Commonly Used Nitrogen Dioxide Data at a Glance
+
+Descriptions of these measurements will be reviewed in more detail later in this Data Pathfinder. The following sections will help guide you to topic-specific data and resources for accessing, visualizing, preparing/manipulating (e.g. subsetting), and analyzing data. Each observation, model, and reanalysis data has unique characteristics that should be considered when evaluating its use.
+
+An asterisk (*) next to an entry indicates that near real-time (NRT) data products are available through NASA's Land, Atmosphere Near real-time Capability for EOS (LANCE). While not intended for scientific research, NRT data are good resources for monitoring ongoing or time-critical events. To learn more about the difference between NRT and Standard Science Products, see Near Real Time versus Standard Products.
+
+arth Observation Data by Sensor:
+OMI
+
+The Ozone Monitoring Instrument (OMI) aboard NASA’s Aura satellite uses an imaging spectrometer to distinguish between aerosol types, such as smoke, dust, and sulfates. It measures cloud pressure and coverage, which provides data to derive tropospheric ozone. OMI provides a record of total ozone and other atmospheric parameters related to ozone chemistry and climate. OMI also measures pollutants such as ozone, nitrogen dioxide, sulfur dioxide, and aerosols, which the U.S. Environmental Protection Agency (EPA) has designated as posing serious threats to human health and agricultural productivity. 
+
+Daily OMI NO2 data can be accessed and interactively explored using NASA Worldview:
+
+    OMI NO2 data
+
+NASA's Air Quality site provides more information on NO2, as well as trend maps and pre-made images of NO2 over cities and power plants.
+
+Using an online interactive tool called Giovanni, map visualizations of OMI NO2 data products can be downloaded as PNG images, or as GeoTIFF or KMZ files; time-series data are available as CSV data files, and animations are in either webm video format or animated GIF images:
+
+    OMI NO2 Tropospheric Column (30% Cloud Screened) data
+
+Research quality data products can be accessed using Earthdata Search:
+
+    OMI NO2 Total and Tropospheric Column data
+
+TROPOMI
+
+The Tropospheric Monitoring Instrument (TROPOMI) was co-funded by ESA (European Space Agency) and the Netherlands. It is the single payload aboard ESA's Sentinel-5P spacecraft and measures the solar radiation reflected by and radiated from Earth.
+
+Research quality data:
+
+    TROPOMI NO2 Data from Earthdata Search
+    ESA TROPOMI NO2
+
+    provides additional information about this Level 2 data product
+
+Model Data:
+GEOS-CF
+
+Goddard Earth Observing System (GEOS) GEOS-Composition Forecast (CF) system forecasts trace gas and aerosol fields using constrained meteorology from GEOS and the GEOS-Chem chemical mechanism. This community-developed, global 3D model of atmospheric chemistry is publicly available and offers five-day forecasts. Forecasts using the GEOS system are experimental and the use of these forecasts for purposes other than research is not recommended.
+
+    Interactive Composition Forecast Map of NO2
+    Composition Forecast Datagrams of NO2
+    Composition Forecast Maps Surface NO2
+
+Land Use Regression (LUR)
+
+The Nitrogen Dioxide Surface-Level Annual Average Concentrations Product contains estimated global NO2 surface values derived using a Land Use Regression (LUR) model (based on 5,220 NO2 monitors in 58 countries and land use variables) for the years 2010-2012. NO2 column densities from the Ozone Monitoring Instrument and MERRA-2 scale the concentrations to other years between 1990 and 2020. This product is part of NASA's Health and Air Quality Applied Sciences Team (HAQAST) effort.
+
+Research quality data products can be accessed using Earthdata Search:
+
+    Nitrogen Dioxide Surface-Level Annual Average Concentrations V1
+
+NASA’s Health and Air Quality Applied Sciences Team (HAQAST) external datasets
+
+    Surface NO2
+
+    : Global, Atmospheric Composition Analysis Group, Washington University in St. Louis
+        Estimates of annual ground-level nitrogen dioxide (NO2) concentrations for 2019 with ~1 km resolution created by combining satellite NO2 column observations from TROPOMI with information from the GEOS-Chem chemical transport model and ground-based monitoring
+
+Field Campaign Observation Data
+ATom
+
+The Atmospheric Tomography Mission (ATom) is a NASA Earth Venture Suborbital-2 mission to study the impact of human-produced air pollution on greenhouse gases and on chemically reactive gases in the atmosphere. ATom deployed an extensive gas and aerosol payload on the NASA DC-8 aircraft for systematic, global-scale sampling of the atmosphere, profiling continuously from 0.2 to 12 km altitude. Around-the-world flights were conducted in each of four seasons between 2016 and 2018.
+
+    Find Aerosol ATom datasets in Earthdata Search
+    Browse ATom datasets
+
+at Oak Ridge National Laboratory Distributed Active Archive Center 

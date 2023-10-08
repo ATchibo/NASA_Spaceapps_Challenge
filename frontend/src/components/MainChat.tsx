@@ -55,7 +55,7 @@ const MainChat = () => {
     const [receivingMsg, setReceivingMsg] = useState(false);
 
     const connectToWebsocket = () => {
-        return new WebSocket('wss://fded-34-125-27-194.ngrok-free.app/queue/join');
+        return new WebSocket('wss://e038-34-125-61-168.ngrok-free.app/queue/join');
     }
 
     const sessionHash = "lji2pmsp8uk";
