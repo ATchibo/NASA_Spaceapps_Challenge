@@ -9,6 +9,8 @@ type BotChatBubbleProps = {
 
 const BotChatBubble = ({message}: BotChatBubbleProps) => {
 
+    console.log("msg in chat bubble", message);
+
     return (
         <Card
             className="

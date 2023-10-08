@@ -428,9 +428,22 @@ const MainChat = () => {
             } else if (dataString.includes("process_starts")) {
                 setReceivedMsg("");
             } else if (dataString.includes("process_generating")) {
-                const response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"]")[0];
+                let response = (ev.data as string).split(msgToSend + "\",\"")[1].split("\"]")[0];
                 // console.log(response);
-                setReceivedMsg(receivedMsg + response);
+                response = receivedMsg + response;
+
+                for (let [key, value] of Object.entries(linksDict)) {
+
+                    console.log("cheie:", key);
+                    if (response.includes(key)) {
+                        console.log("include", key);
+                        console.log("replace with:", value);
+                        response = response.replaceAll(key, value);
+                        console.log("response after", response);
+                    }
+                }
+
+                setReceivedMsg(response);
             }
         });
         socket?.addEventListener(closeEvent, ev => {
@@ -472,12 +485,6 @@ const MainChat = () => {
 
     useEffect(() => {
         console.log("Received msg: ", receivedMsg);
-
-        for (let [key, value] of Object.entries(linksDict)) {
-            if (receivedMsg.includes(key)) {
-                receivedMsg.replace(key, value);
-            }
-        }
 
         if (receivedMsg.length > 0) {
             setMessageQueue([...messageQueue.slice(0, messageQueue.length-1), {sender: SENDER_TYPE_BOT, content: receivedMsg}]);
